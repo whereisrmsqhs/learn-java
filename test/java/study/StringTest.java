@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.assertj.core.api.Assertions;
 
-public class StringTest {
+class StringTest {
 
     String inputNumbersWithComma;
 
@@ -46,4 +46,15 @@ public class StringTest {
         String substring = inputNumbersWithComma.substring(1, inputNumbersWithComma.length()-1);
         Assertions.assertThat(substring).isEqualTo("1,2");
     }
+
+    @Test
+    @DisplayName("abc값을 charAt()으로 가져올때 범위를 벗어나면 StringIndexOutOfBoundsException발생")
+    void CharAtABC(){
+        String abc = "ABC";
+        Assertions.assertThatThrownBy(() -> abc.charAt(abc.length()))
+                .isInstanceOf(IndexOutOfBoundsException.class)
+                .hasMessageContaining("String index out of range")
+                .hasMessageContaining(String.valueOf(abc.length()));
+    }
+
 }
